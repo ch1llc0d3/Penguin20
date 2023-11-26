@@ -3,48 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="bold">Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title class="font-bold">Index</title>
 </head>
-<body>
+<body class="bg-gray-100">
 
-    <h1>Hola soy {{nombre}} y tengo {{edad}} anhos</h1>
-    {% for participante in participantes_html %}
-        <li><ol>{{participante.nombre}} {{participante.apellido}} y tengo {{participante.edad}} anhos
-            <!-- Inicio Eliminar-->
-            <button class="font-bold text-sky-600 pb-6">
-                <a href="{{ url_for('eliminar', id=participante.id_participante) }}">Eliminar</a>
-            </button>
-            <!-- Fin Eliminar-->
-            <!-- Inicio Editar -->
-            <button>
-            <a href="{{ url_for('editar', id=participante.id_participante) }}">Editar</a>
-            </button>
-            <!-- Fin Editar -->
-        </ol></li>
-    {% endfor %}
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-4">Hola soy {{nombre}} y tengo {{edad}} años</h1>
+        <p class="mb-6">Mi mentor es {{mentor["nombre"]}}, tiene {{mentor["edad"]}} años y dice "{{mentor["Frase"]}}"</p>
 
-    <p>Mi mentor es {{mentor.nombre}}, su frase es {{mentor.frase}}</p>
-    <!-- Inicio create - crear -->
-    <h2 class="font-bold pt-4 pl-4 pb-2">Aqui podras Agregar Alumnas</h2>
+        <ul>
+            {% for participante in participantes_html %}
+                <li class="mb-4">
+                    <ol class="flex items-center">
+                        <span class="mr-4">Soy {{participante.nombre}} {{participante.apellido}} y {{participante.edad}} años</span>
+                        <!-- Inicio Eliminar-->
+                        <button class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 mr-2">
+                            <a href="{{ url_for('eliminar', id=participante.id_participante) }}">Eliminar</a>
+                        </button>
+                        <!-- Fin Eliminar-->
+                        <!-- Inicio Editar -->
+                        <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
+                            <a href="{{ url_for('editar', id=participante.id_participante) }}">Editar</a>
+                        </button>
+                        <!-- Fin Editar -->
+                    </ol>
+                </li>
+            {% endfor %}
+        </ul>
 
-    <form action="{{ url_for('crear') }}", method="post">
+        <!-- Inicio create - crear -->
+        <h2 class="font-bold pt-4 pl-4 pb-2">Aquí podrás agregar participantes</h2>
 
-        <div class="pt-2 pl-8">
-            <p>Nombre:</p>
-            <input name='nombre' type="text" placeholder="Nombre de la Participante">
-            <p>Apellido:</p>
-            <input name='apellido' type="text" placeholder="Apellido del Participante">
-            <p>Edad:</p>
-            <input name='edad' type="number" placeholder="Edad del Participante">
-            <p>Estado Civil:</p>
-            <input name='estado_civil' type="text" placeholder="Estado civil">
-        </div>
-        <div class="pt-4 pl-8">
-            <button type="submit" class="text-sky-600 font-bold py-2 px-4">
-                Agregar Participante
-            </button>
-        </div>
-    </form>
-    <!-- Fin create - crear -->
+        <form action="{{ url_for('crear') }}" method="post" class="bg-white p-8 rounded shadow-md">
+            <div class="mb-4">
+                <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre del Participante:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del Participante" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido del Participante:</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido del Participante" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="edad" class="block text-gray-700 text-sm font-bold mb-2">Edad del Participante:</label>
+                <input type="number" id="edad" name="edad" placeholder="Edad del Participante" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="estado_civil" class="block text-gray-700 text-sm font-bold mb-2">Estado Civil:</label>
+                <input type="text" id="estado_civil" name="estado_civil" placeholder="Estado Civil" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Agregar Participante</button>
+        </form>
+        <!-- Fin create - crear -->
+    </div>
+
 </body>
 </html>

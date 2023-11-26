@@ -3,29 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Editar</title>
 </head>
-<body>
-    <h1 class="font-bold pt-4 pl-8 pb-6">Aqui podras editar al participante seleccionado</h1>
+<body class="bg-gray-100">
 
-    <form action="{{ url_for('editar', id=participante.partipante_id) }}" method="post">
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-6">Aquí podrás editar al participante seleccionado</h1>
 
-        <div class="pt-2 pl-8">
-            <input type="text" name="nombre" placeholder="Nombre del participante" value="{{participante.nombre}}">
-            <input type="text" name="apellido" placeholder="Apellido del participante" value="{{participante.apellido}}">
-            <input type="number" name="edad" placeholder="Participante del participante" value="{{participante.edad}}">
-            <input type="text" name="estado_civil" placeholder="Estado Civil" value="{{participante.estado_civil}}">
-        </div>
+        <form action="{{ url_for('editar', id=participante.id_participante) }}" method="post" class="bg-white p-8 rounded shadow-md">
+            <div class="mb-4">
+                <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre del participante:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del participante" value="{{participante.nombre}}" class="w-full border border-gray-300 p-2 rounded">
+            </div>
 
-        <button type="submit" class="font-bold text-sky-600 pt-4 pl-8" >
-            <a href="{{ url_for('index') }}">Editar</a>
-        </button>
-        <button class="font-bold pt-4 pl-8 text-sky-600">
-            <a href="{{ url_for('index') }}">Cancelar</a>
-        </button>
+            <div class="mb-4">
+                <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido del participante:</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido del participante" value="{{participante.apellido}}" class="w-full border border-gray-300 p-2 rounded">
+            </div>
 
-    </form>
+            <div class="mb-4">
+                <label for="edad" class="block text-gray-700 text-sm font-bold mb-2">Edad del participante:</label>
+                <input type="number" id="edad" name="edad" placeholder="Edad del participante" value="{{participante.edad}}" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="estado_civil" class="block text-gray-700 text-sm font-bold mb-2">Estado Civil:</label>
+                <input type="text" id="estado_civil" name="estado_civil" placeholder="Estado Civil" value="{{participante.estado_civil}}" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Editar</button>
+                <a href="{{ url_for('index') }}" class="text-blue-500 hover:underline">Cancelar</a>
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>

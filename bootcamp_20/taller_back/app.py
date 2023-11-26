@@ -19,9 +19,12 @@ def index():
     #ESTIRAR DATOS DE LA BASE DE DATOS
     participantes = Participante.query.all()
 
-    return render_template('index.html',participantes_html = participantes)
-
-
+    mentor = {
+        "nombre": 'Eduardo',
+        "edad": 30,
+        "Frase": "Exactamente_Exactamente"
+    }
+    return render_template('index.html',participantes_html = participantes, mentor =mentor)
 
 @app.route('/crear',methods = ['POST'])
 def crear():
@@ -49,7 +52,6 @@ def eliminar(id):
     db.session.commit()
     #mostrar en index
     return redirect(url_for('index'))
-
 @app.route('/editar/<id>',methods=['GET','POST'])
 def editar(id):
     participante = Participante.query.get(id)
@@ -68,12 +70,6 @@ def editar(id):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('editar.html',participante = participante)
-
-
-
-
-
-
 
 
 
