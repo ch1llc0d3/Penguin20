@@ -1,0 +1,6 @@
+flask
+requests
+return_template
+Flask-SQLAlchemy
+SQALchemy
+flask-login
